@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: perf
+  namespace: confluent
+  labels:
+    type: perf
+spec:
+  template:
+    spec:
+      containers:
+      - name: perf
+        image: confluentinc/cp-server
+        env:
+        - name: KAFKA_OPTS
+          value: "-Djavax.net.ssl.trustStore=/ts/trusted.jks -Djavax.net.ssl.trustStorePassword=changeit"
+        volumeMounts:
+        - name: truststore
+          mountPath: "/ts"
+        - name: props
+          mountPath: "/conf"
+            #        command: ["nc", "-zv", "kafka.confluent.svc.cluster.local", "9073"]
+        command: ["kafka-producer-perf-test",  "--producer.config", "/conf/kafka.properties", "--num-records", "100000000", "--record-size", "1000", "--throughput", "1000", "--topic", "test"]
+      restartPolicy: Never
+      volumes:
+      - name: truststore
+        secret:
+          secretName: kafka-truststore
+      - name: props
+        secret:
+          secretName: kafka-properties
+#          defaultMode: 256
+  backoffLimit: 4
