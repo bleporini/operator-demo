@@ -6,12 +6,16 @@
 
 CLUSTER_CONF_DIR=$TUTORIAL_HOME/security/production-secure-deploy
 
+echo Creating API Key for Health+
+confluent api-key create --resource cloud --description "For h+" -o json|jq --raw-output '"api.key=" + .key + ",api.secret=" + .secret'|sed "s/,/\n/" > telemetry.txt
 
 kubectl create namespace confluent
 kubectl config set-context --current --namespace confluent
 
+kubectl create secret generic telemetry --from-file=telemetry.txt
+
 helm repo add confluentinc https://packages.confluent.io/helm
-helm upgrade --install operator confluentinc/confluent-for-kubernetes
+helm upgrade --install operator confluentinc/confluent-for-kubernetes --set telemetry.enabled=true --set telemetry.secretRef=telemetry
 
 helm upgrade --install -f $TUTORIAL_HOME/assets/openldap/ldaps-rbac.yaml test-ldap $TUTORIAL_HOME/assets/openldap --namespace confluent
 

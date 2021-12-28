@@ -1,5 +1,13 @@
 # Provisionner scripts to spin up a fully secured  Confluent For Kubernetes in an on purpose created GKE cluster
 
+## Prerequisites
+
+- `git`
+- `kubectl`
+- `gcloud` CLI
+- `confluent` logged in (you can use `confluent login --save` one for all)
+- docker
+
 ## Procedure
 
 - Checkout https://github.com/confluentinc/confluent-kubernetes-examples
