@@ -20,14 +20,10 @@ helm upgrade --install operator confluentinc/confluent-for-kubernetes --set tele
 helm upgrade --install -f $TUTORIAL_HOME/assets/openldap/ldaps-rbac.yaml test-ldap $TUTORIAL_HOME/assets/openldap --namespace confluent
 
 kubectl create secret generic tls-group1 \
---from-file=fullchain.pem=$TUTORIAL_HOME/assets/certs/generated/kafka-server.pem \
---from-file=cacerts.pem=$TUTORIAL_HOME/assets/certs/generated/cacerts.pem \
-   --from-file=privkey.pem=$TUTORIAL_HOME/assets/certs/generated/kafka-server-key.pem
-
-kubectl create secret generic tls-group2 \
---from-file=fullchain.pem=$TUTORIAL_HOME/assets/certs/generated/zookeeper-server.pem \
---from-file=cacerts.pem=$TUTORIAL_HOME/assets/certs/generated/cacerts.pem \
-   --from-file=privkey.pem=$TUTORIAL_HOME/assets/certs/generated/zookeeper-server-key.pem
+  --from-file=fullchain.pem=$TUTORIAL_HOME/assets/certs/generated/server.pem \
+  --from-file=cacerts.pem=$TUTORIAL_HOME/assets/certs/generated/ca.pem \
+  --from-file=privkey.pem=$TUTORIAL_HOME/assets/certs/generated/server-key.pem \
+  --namespace confluent
 
 kubectl create secret generic credential \
  --from-file=plain-users.json=$CLUSTER_CONF_DIR/creds-kafka-sasl-users.json \
