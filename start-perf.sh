@@ -4,9 +4,11 @@
 
 . ./functions.sh
 
+set -e
+
 CERT_DIR=$TUTORIAL_HOME/assets/certs/generated
 
-docker run -ti --rm -v $CERT_DIR:/certs --workdir /certs openjdk:15 keytool -importcert -noprompt -alias kafka  -file kafka-server.pem -keystore trusted.jks -storepass changeit
+docker run -ti --rm -v $CERT_DIR:/certs --workdir /certs openjdk:15 keytool -importcert -noprompt -alias kafka  -file server.pem -keystore trusted.jks -storepass changeit
 
 mv $CERT_DIR/trusted.jks .
 
