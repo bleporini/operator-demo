@@ -17,6 +17,7 @@ CLUSTER_NAME=<the k8s cluster name>
 GCP_PROJECT=<the project id to host the cluster>
 GCP_REGION=<target region>
 TUTORIAL_HOME=<path to the confluent-kubernetes-example cloned repository>
+K8S_NODES=15
 ```
 - Then run `./setup.sh <your environement variable file>`. It will create a k8s cluster, will generate a demo CA to issue all certificates, insall the Confluent Operator and provision a fully secured Confluent Platform instance
 
