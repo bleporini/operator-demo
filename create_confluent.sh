@@ -30,6 +30,7 @@ kubectl create secret generic credential \
  --from-file=digest-users.json=$CLUSTER_CONF_DIR/creds-zookeeper-sasl-digest-users.json \
  --from-file=digest.txt=$CLUSTER_CONF_DIR/creds-kafka-zookeeper-credentials.txt \
  --from-file=plain.txt=$CLUSTER_CONF_DIR/creds-client-kafka-sasl-user.txt \
+ --from-file=plain-interbroker.txt=$CLUSTER_CONF_DIR/creds-client-kafka-sasl-user.txt \
  --from-file=basic.txt=$CLUSTER_CONF_DIR/creds-control-center-users.txt \
  --from-file=ldap.txt=$CLUSTER_CONF_DIR/ldap.txt
 
