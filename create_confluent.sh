@@ -7,7 +7,7 @@
 CLUSTER_CONF_DIR=$TUTORIAL_HOME/security/production-secure-deploy
 
 echo Creating API Key for Health+
-confluent api-key create --resource cloud --description "For h+" -o json|jq --raw-output '"api.key=" + .key + ",api.secret=" + .secret'|sed "s/,/\n/" > telemetry.txt
+confluent api-key create --resource cloud --description "For h+" -o json|jq --raw-output '"api.key=" + .api_key + ",api.secret=" + .api_secret'|sed "s/,/\n/" > telemetry.txt
 
 kubectl create namespace confluent
 kubectl config set-context --current --namespace confluent

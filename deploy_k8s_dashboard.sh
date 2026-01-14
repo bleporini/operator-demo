@@ -11,3 +11,5 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 echo Copy the token displayed above ⬆️ ⬆️ ⬆️ , run kubectl proxy and open \
     http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+open http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/ & 
+kubectl proxy
